@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Following
+    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button fill="outline" color="primary" (click)='addTopic()'>
+        Add Topic
+        <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="false">
+
+  <ion-item>
+    <ion-label>Topic</ion-label>
+    <ion-select value="bitcoin" okText="Okay" cancelText="Dismiss" (ionChange)='selectTopic($event)'  [(ngModel)]="currentTopic">
+      <ion-select-option *ngFor='let topic of topics' [value]="topic">{{topic}}</ion-select-option>
+    </ion-select>
+    <ion-button fill="" color='danger' slot="end" (click)='deleteTopic()'>
+      <ion-icon slot="end" name="trash-outline" color='danger'></ion-icon>
+    </ion-button>
+
+  </ion-item>
+
+  <ion-item lines="none" *ngIf='!topics.length' (click)="addTopic()" detail> 
+    <p style="color:orangered; font-weight: bold;">
+      Your list is empty.
+      Add a topic to follow.
+    </p>
+  </ion-item>
+
+
+  <ion-list>
+    <ion-item lines="none" *ngIf='!news.length' > 
+      <p style="color:orangered; font-weight: bold;">
+       No news for this topic
+      </p>
+    </ion-item>
+
+    <ion-item *ngFor='let new of news' (click)='open(new)'>
+      <ion-thumbnail slot="start">
+        <img src="{{new.urlToImage}}" *ngIf='new.urlToImage'>
+      </ion-thumbnail>
+      <ion-label>
+        <p class="news-title strong">{{new.title}}</p>
+        <p><small>{{new.publishedAt | date:'short'}}</small></p>
+
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+
+
+</ion-content>
+<!-- <ion-footer class="ion-no-border">
+  <ion-item>
+    <ion-input placeholder="Enter Topic" [(ngModel)]="newTopic"></ion-input>
+    <ion-button fill="outline" slot="end" (click)='addTopic()'>Add</ion-button>
+  </ion-item>
+</ion-footer> -->

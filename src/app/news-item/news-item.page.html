@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="primary">
+      <ion-button fill="outline" color="primary" (click)='share()'>
+        Share
+        <ion-icon slot="end" name="share-social-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <img src="{{news.urlToImage}}" />
+    <ion-card-header>
+      <ion-card-title>{{news.title}}</ion-card-title>
+      <ion-card-subtitle>{{news.description}}</ion-card-subtitle>
+
+    </ion-card-header>
+    <ion-card-content>
+      {{news.content}} <a [href]='news.url' target='_blank'>See More</a>
+    </ion-card-content>
+  </ion-card>
+
+
+</ion-content>
