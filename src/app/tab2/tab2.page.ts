@@ -17,17 +17,13 @@ export class Tab2Page implements OnInit {
    ) { }
 
    ngOnInit() {
-
-      // everything
-
+      // get all sources
       this.http.get('https://newsapi.org/v2/sources?apiKey=b9f01adf9bd9451ba09f8ef0a8c979ba').subscribe((data:any)=>{
       this.sources = data.sources;
       })
-
-
    }
 
-
+// open news pahge by source
    go(id, name) {
       // window.open(url, '_blank')
       let navigationExtras: NavigationExtras = {

@@ -19,20 +19,17 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
-   //  this.news = data;
-   //  console.log(data);
     this.http.get('https://newsapi.org/v2/top-headlines?country=ie&apiKey=b9f01adf9bd9451ba09f8ef0a8c979ba').subscribe((news:any)=>{
-      // console.log(news);
       this.news = news.articles;
-      // console.log(this.news);
-      // console.log(JSON.stringify(this.news));
     })
   }
 
+  // open news in browser 
   openUrl(url){
     window.open(url, '_blank')
   }
 
+  // open news in a page
   open(news){
    let navigationExtras: NavigationExtras = {
       state: {

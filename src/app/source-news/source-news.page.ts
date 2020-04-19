@@ -19,21 +19,18 @@ export class SourceNewsPage implements OnInit {
     private http: HttpClient,
     public alertController: AlertController
   ) {
-    // this.route.queryParams.subscribe(params => {
+    // get source
     if (this.router.getCurrentNavigation().extras.state) {
       this.source = this.router.getCurrentNavigation().extras.state.source;
       this.sourceName = this.router.getCurrentNavigation().extras.state.sourceName;
-
-      // console.log(this.source);
     } else {
-      // console.log('tohome')
       this.router.navigateByUrl('/')
     }
-    // });
   }
 
   ngOnInit() {
     if (this.source) {
+      ///load news by source
       this.http.get(`https://newsapi.org/v2/everything?sources=${this.source}&apiKey=b9f01adf9bd9451ba09f8ef0a8c979ba`).subscribe((news: any) => {
         this.news = news.articles;
         // console.log(this.news);
@@ -41,7 +38,6 @@ export class SourceNewsPage implements OnInit {
           this.presentAlertMultipleButtons();
           window.history.back();
         }
-        // console.log(JSON.stringify(this.news));
       })
     }
   }
@@ -58,6 +54,7 @@ export class SourceNewsPage implements OnInit {
   }
 
   open(news) {
+    // open new in a page
     let navigationExtras: NavigationExtras = {
       state: {
         news: news

@@ -20,16 +20,15 @@ export class Tab3Page {
 
 
   ) {
-    // localStorage.removeItem('following');  
-  
+    // get following topics
     if (localStorage.getItem('following')) {
       let topics = localStorage.getItem('following');
       this.topics = topics.split(',');
-      // this.getTopicNews(this.topics[0]);
       this.currentTopic = this.topics[0];
       console.log(this.topics.length);
       if (this.topics.length > 0) {
         console.log('get news')
+        // load news
         this.getTopicNews(this.topics[0]);
       }
   
@@ -74,31 +73,31 @@ export class Tab3Page {
     await alert.present();
   }
 
+  // show alert message 
   showalert(message) {
     alert(message);
   }
 
+  // select topic
   selectTopic(evt) {
-    console.log(evt.target.value)
+    // console.log(evt.target.value)
     if (evt.target.value) {
       this.getTopicNews(evt.target.value);
       this.currentTopic = evt.target.value;
     }
-
   }
 
+  // load news
   getTopicNews(topic) {
     this.http.get(`https://newsapi.org/v2/everything?q=${topic}&apiKey=b9f01adf9bd9451ba09f8ef0a8c979ba`)
       .subscribe((news: any) => {
-        console.log(news);
         this.news = news.articles;
       }, (err)=>{
-        alert('News API is down')
       });
   }
 
+  // delete topic 
   async deleteTopic() {
-
     const alert = await this.alertController.create({
       header: 'Confirm',
       message: 'Delete topic',
@@ -129,24 +128,23 @@ export class Tab3Page {
       ]
     })
     await alert.present();
-
-
-
   }
 
+// update following topics
   updateFollowing(){
     let values = JSON.stringify(this.topics);
     let u = values.substring(1, values.length - 1);
     u = u.replace(/"/g, "");
-
     localStorage.setItem('following', u);
   }
 
+  // refresh topic
   refreshView() {
     this.currentTopic = this.topics[0];
     this.getTopicNews(this.currentTopic);
-
   }
+
+// open new in a page 
   open(news) {
     let navigationExtras: NavigationExtras = {
       state: {

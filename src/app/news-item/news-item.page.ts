@@ -18,8 +18,8 @@ export class NewsItemPage implements OnInit {
     private socialSharing: SocialSharing,
     private actionSheetController: ActionSheetController,
     public alertController: AlertController
-
   ) {
+    //get news
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.news = this.router.getCurrentNavigation().extras.state.news;
@@ -32,6 +32,7 @@ export class NewsItemPage implements OnInit {
   ngOnInit() {
   }
 
+  //share
   async share() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Share',
@@ -46,16 +47,8 @@ export class NewsItemPage implements OnInit {
         icon: 'chatbox-outline',
         handler: () => {
           this.shareTo('sms');
-
         }
       }, 
-      // {
-      //   text: 'Facebook',
-      //   icon: 'logo-facebook',
-      //   handler: () => {
-      //     this.shareTo('facebook');
-      //   }
-      // }, 
       {
         text: 'Whatsapp',
         icon: 'logo-whatsapp',
@@ -81,6 +74,7 @@ export class NewsItemPage implements OnInit {
     let news_link = this.news.url;
     let news_image = this.news.urlToImage;
     switch (app) {
+      // to email
       case 'email':
         this.socialSharing.canShareViaEmail().then(() => {
           // Sharing via email is possible
@@ -95,22 +89,15 @@ export class NewsItemPage implements OnInit {
 
         });
         break;
+        // to sms
       case 'sms':
         this.socialSharing.shareViaSMS(news_title + ' ' + news_link, '').then(() => {
         }).catch((err) => {
           this.alertCordovaNotAvailable();
         });
         break;
-      // case 'facebook':
-      //   this.socialSharing.shareViaFacebookWithPasteMessageHint(news_title, news_image, news_link, 'news APP')
-      //   // this.socialSharing.shareViaFacebook(news_title, news_image, news_link)
-      //   .then(() => {
-      //   }).catch((err) => {
-      //     console.log(err);
-      //     this.alertCordovaNotAvailable()
-      //   });
-      //   break;
-      case 'whatsapp':
+// to whatsapp
+        case 'whatsapp':
         this.socialSharing.shareViaWhatsApp(news_title, news_image, news_link).then(() => {
         }).catch((err) => {
           this.alertCordovaNotAvailable()
@@ -120,6 +107,8 @@ export class NewsItemPage implements OnInit {
         break;
     }
   }
+
+  //show alert cordova not available
   async alertCordovaNotAvailable() {
     const alert = await this.alertController.create({
       header: '',
