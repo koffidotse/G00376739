@@ -17,7 +17,6 @@
       <ion-label>Ireland</ion-label>
     </ion-list-header>
     <ion-item *ngFor='let new of news' (click)='open(new)'>
-    
       <ion-thumbnail slot="start">
         <img src="{{new?.urlToImage}}">
       </ion-thumbnail>
@@ -28,6 +27,4 @@
       </ion-label>
     </ion-item>
   </ion-list>
-
-  <!-- <app-explore-container name="Tab 1 page"></app-explore-container> -->
 </ion-content>

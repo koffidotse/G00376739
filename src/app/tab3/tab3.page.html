@@ -25,6 +25,7 @@
 
   </ion-item>
 
+  <!-- empty list  -->
   <ion-item lines="none" *ngIf='!topics.length' (click)="addTopic()" detail> 
     <p style="color:orangered; font-weight: bold;">
       Your list is empty.
@@ -34,7 +35,8 @@
 
 
   <ion-list>
-    <ion-item lines="none" *ngIf='!news.length' > 
+    <!-- no news -->
+    <ion-item lines="none" *ngIf='!news.length & topics.length' > 
       <p style="color:orangered; font-weight: bold;">
        No news for this topic
       </p>

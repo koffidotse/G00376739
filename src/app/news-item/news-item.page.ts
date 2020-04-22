@@ -32,7 +32,7 @@ export class NewsItemPage implements OnInit {
   ngOnInit() {
   }
 
-  //share
+  //share to email, sms or whatsapp
   async share() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Share',
@@ -48,7 +48,7 @@ export class NewsItemPage implements OnInit {
         handler: () => {
           this.shareTo('sms');
         }
-      }, 
+      },
       {
         text: 'Whatsapp',
         icon: 'logo-whatsapp',
@@ -67,8 +67,8 @@ export class NewsItemPage implements OnInit {
     await actionSheet.present();
   }
 
-  shareTo(app) {
 
+  shareTo(app) {
     let news_title = this.news.title;
     let news_body = this.news.contents;
     let news_link = this.news.url;
@@ -89,15 +89,15 @@ export class NewsItemPage implements OnInit {
 
         });
         break;
-        // to sms
+      // to sms
       case 'sms':
         this.socialSharing.shareViaSMS(news_title + ' ' + news_link, '').then(() => {
         }).catch((err) => {
           this.alertCordovaNotAvailable();
         });
         break;
-// to whatsapp
-        case 'whatsapp':
+      // to whatsapp
+      case 'whatsapp':
         this.socialSharing.shareViaWhatsApp(news_title, news_image, news_link).then(() => {
         }).catch((err) => {
           this.alertCordovaNotAvailable()

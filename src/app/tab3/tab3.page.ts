@@ -35,6 +35,7 @@ export class Tab3Page {
     }
   }
 
+  // add new topic
   async addTopic() {
     const alert = await this.alertController.create({
       header: 'Add Topic',

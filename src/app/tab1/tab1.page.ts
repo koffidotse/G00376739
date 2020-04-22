@@ -19,6 +19,7 @@ export class Tab1Page implements OnInit {
   ) {}
 
   ngOnInit() {
+    // get headlines in Ireland
     this.http.get('https://newsapi.org/v2/top-headlines?country=ie&apiKey=b9f01adf9bd9451ba09f8ef0a8c979ba').subscribe((news:any)=>{
       this.news = news.articles;
     })

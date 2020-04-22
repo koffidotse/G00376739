@@ -35,21 +35,21 @@ export class SourceNewsPage implements OnInit {
         this.news = news.articles;
         // console.log(this.news);
         if (!news.articles.length) {
-          this.presentAlertMultipleButtons();
+          this.presentAlert();
           window.history.back();
         }
       })
     }
   }
 
-  async presentAlertMultipleButtons() {
+  async presentAlert() {
+    // show no news alert 
     const alert = await this.alertController.create({
       header: this.source,
       subHeader: 'Not Available',
       message: 'No news available from this source',
       buttons: ['OK']
     });
-
     await alert.present();
   }
 
@@ -62,6 +62,4 @@ export class SourceNewsPage implements OnInit {
     };
     this.router.navigate(['/news-item'], navigationExtras);
   }
-
-
 }
